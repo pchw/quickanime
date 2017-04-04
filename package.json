@@ -1,0 +1,27 @@
+{
+  "name": "AnimeTheThisSeason",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@shoutem/ui": "^0.12.0",
+    "axios": "^0.16.0",
+    "lodash": "^4.17.4",
+    "react": "~15.4.1",
+    "react-native": "0.42.3",
+    "react-native-config": "^0.3.1",
+    "react-navigation": "^1.0.0-beta.7"
+  },
+  "devDependencies": {
+    "babel-jest": "19.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "19.0.2",
+    "react-test-renderer": "~15.4.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
