@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, ScrollView } from 'react-native';
+import { InteractionManager } from 'react-native';
 
 import {
   NavigationBar,
@@ -21,12 +21,12 @@ import {
 import axios from 'axios';
 import _ from 'lodash';
 
-import Config from 'react-native-config';
+import Config from '../config';
 const ACCESS_TOKEN = Config.ACCESS_TOKEN;
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Anime the This Season'
+    title: 'quickanime'
   };
   constructor(props) {
     super(props);
@@ -54,13 +54,14 @@ export default class HomeScreen extends React.Component {
   }
   renderRow(work) {
     const { navigate } = this.props.navigation;
-    const image = work.image
-      ? { uri: work.image }
+    const image = work.images && work.images.facebook.og_image_url
+      ? { uri: work.images.facebook.og_image_url }
       : require('../images/tv_sunaarashi.png');
     return (
       <TouchableOpacity
-        onPress={() =>
-          navigate('Web', { uri: work.official_site_url, title: work.title })}
+        onPress={(() => {
+          navigate('Web', { uri: work.official_site_url, title: work.title });
+        }).bind(this)}
       >
         <Row key={work.id}>
           <Image styleName="medium rounded-corners" source={image} />
@@ -103,44 +104,6 @@ export default class HomeScreen extends React.Component {
             isLoading: false
           });
         }
-        responseWorks.forEach((work, index) => {
-          if (work.official_site_url) {
-            fetch(work.official_site_url, {
-              method: 'GET',
-              headers: {
-                'User-Agent': 'facebookexternalhit/1.1'
-              }
-            })
-              .then(response => {
-                return response.text();
-              })
-              .then(responseText => {
-                // <meta property="og:image" content="*******">
-                // <meta property="og:image" content="http://eromanga-sensei.com/ogp2.png" />
-                let ogImage = responseText.match(
-                  /<meta[\s]*property=["']og:image["'][\s]*content=["']([^\'\"]+)["'][\s]*\/?>/
-                );
-                if (!ogImage) {
-                  ogImage = responseText.match(
-                    /<meta[\s]*content=["']([^\"\']+)["'][\s]*property=["']og:image["'][\s]*\/?>/
-                  );
-                }
-                if (ogImage) {
-                  let works = this.works;
-                  for (const i in works) {
-                    if (works[i].id === work.id) {
-                      works[i].image = ogImage[1];
-                    }
-                  }
-                  this.works = works;
-                  _.debounce(this.updateWorks, 1000).bind(this)();
-                }
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          }
-        });
         return this.works;
       })
       .catch(error => {
