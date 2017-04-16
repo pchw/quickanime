@@ -55,3 +55,4 @@ fastlane/screenshots
 
 # Other
 .env
+config.js
