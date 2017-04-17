@@ -87,7 +87,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.animethethisseason"
+        applicationId "com.quickanime"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -126,7 +126,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-config')
     compile project(':react-native-photo-view')
     compile project(':react-native-share')
     compile project(':react-native-linear-gradient')

@@ -20,31 +20,71 @@ import {
 
 import axios from 'axios';
 import _ from 'lodash';
+import moment from 'moment';
 
 import Config from '../config';
 const ACCESS_TOKEN = Config.ACCESS_TOKEN;
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'quickanime'
+    title: '今期のアニメ'
   };
   constructor(props) {
     super(props);
-    const SEASONS = [
-      { title: '2017 Spring', value: '2017-spring' },
-      { title: '2016 Spring', value: '2016-spring' },
-      { title: '2016 Summer', value: '2016-summer' },
-      { title: '2016 Autumn', value: '2016-autumn' },
-      { title: '2016 Winter', value: '2016-winter' }
-    ];
+    // const SEASONS = [
+    //   { title: '2017 Spring', value: '2017-spring' },
+    //   { title: '2016 Spring', value: '2016-spring' },
+    //   { title: '2016 Summer', value: '2016-summer' },
+    //   { title: '2016 Autumn', value: '2016-autumn' },
+    //   { title: '2016 Winter', value: '2016-winter' }
+    // ];
+    const SEASONS = this.getSeasons();
+
     this.state = {
       works: [],
       seasons: SEASONS,
-      selectedSeason: SEASONS[0],
+      selectedSeason: SEASONS[1],
       page: 1,
       isLoading: false
     };
     this.works = [];
+  }
+  convertSeasonObject(year, month){
+    console.log(year,month);
+    let seasonNum;
+    const SEASON_ARRAY = [
+      "Spring",
+      "Summer",
+      "Autumn",
+      "Winter"
+    ];
+    year = parseInt(year, 10);
+    month = parseInt(month, 10);
+    if (month > 9) {
+      seasonNum = 2;
+    } else if (month > 6) {
+      seasonNum = 1;
+    } else if (month > 3) {
+      seasonNum = 0;
+    } else {
+      seasonNum = 3;
+    }
+    return {
+      title: `${year} ${SEASON_ARRAY[seasonNum]}`,
+      value: `${year}-${SEASON_ARRAY[seasonNum].toLowerCase()}`
+    };
+  }
+  getSeasons() {
+    let seasons = [];
+    // Next Season
+    seasons.push(this.convertSeasonObject(...moment().add(3, 'months').format('YYYY/MM').split('/')));
+    // This Season
+    seasons.push(this.convertSeasonObject(...moment().format('YYYY/MM').split('/')));
+    // Past Season
+    [1,2,3,4].forEach((i) => {
+      seasons.push(this.convertSeasonObject(...moment().subtract(3*i, 'months').format('YYYY/MM').split('/')));
+    });
+    return seasons;
   }
   componentDidMount() {
     this.fetchWorks(this.state.selectedSeason, 1, true);
@@ -56,7 +96,7 @@ export default class HomeScreen extends React.Component {
     const { navigate } = this.props.navigation;
     const image = work.images && work.images.facebook.og_image_url
       ? { uri: work.images.facebook.og_image_url }
-      : require('../images/tv_sunaarashi.png');
+      : { uri: work.images.recommended_url };
     return (
       <TouchableOpacity
         onPress={(() => {
@@ -123,6 +163,7 @@ export default class HomeScreen extends React.Component {
     this.fetchWorks.bind(this)(selectedSeason, 1, true);
   }
   render() {
+    console.log(this.state.selectedSeason);
     return (
       <Screen>
         <NavigationBar
@@ -132,7 +173,7 @@ export default class HomeScreen extends React.Component {
               selectedOption={
                 this.state.selectedSeason
                   ? this.state.selectedSeason
-                  : this.state.seasons[0]
+                  : this.state.seasons[1]
               }
               onOptionSelected={this.onSeasonChanged.bind(this)}
               titleProperty="title"

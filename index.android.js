@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class AnimeTheThisSeason extends Component {
+export default class quickanime extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('AnimeTheThisSeason', () => AnimeTheThisSeason);
+AppRegistry.registerComponent('quickanime', () => quickanime);

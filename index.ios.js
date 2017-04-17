@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
-const AnimeTheThisSeason = StackNavigator({
+const quickanime = StackNavigator({
   Home: { screen: require('./js/HomeScreen').default },
   Web: { screen: require('./js/WebScreen').default }
 });
 
-AppRegistry.registerComponent('AnimeTheThisSeason', () => AnimeTheThisSeason);
+AppRegistry.registerComponent('quickanime', () => quickanime);
