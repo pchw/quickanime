@@ -49,15 +49,9 @@ export default class HomeScreen extends React.Component {
     };
     this.works = [];
   }
-  convertSeasonObject(year, month){
-    console.log(year,month);
+  convertSeasonObject(year, month) {
     let seasonNum;
-    const SEASON_ARRAY = [
-      "Spring",
-      "Summer",
-      "Autumn",
-      "Winter"
-    ];
+    const SEASON_ARRAY = ['Spring', 'Summer', 'Autumn', 'Winter'];
     year = parseInt(year, 10);
     month = parseInt(month, 10);
     if (month > 9) {
@@ -77,12 +71,22 @@ export default class HomeScreen extends React.Component {
   getSeasons() {
     let seasons = [];
     // Next Season
-    seasons.push(this.convertSeasonObject(...moment().add(3, 'months').format('YYYY/MM').split('/')));
+    seasons.push(
+      this.convertSeasonObject(
+        ...moment().add(3, 'months').format('YYYY/MM').split('/')
+      )
+    );
     // This Season
-    seasons.push(this.convertSeasonObject(...moment().format('YYYY/MM').split('/')));
+    seasons.push(
+      this.convertSeasonObject(...moment().format('YYYY/MM').split('/'))
+    );
     // Past Season
-    [1,2,3,4].forEach((i) => {
-      seasons.push(this.convertSeasonObject(...moment().subtract(3*i, 'months').format('YYYY/MM').split('/')));
+    [1, 2, 3, 4].forEach(i => {
+      seasons.push(
+        this.convertSeasonObject(
+          ...moment().subtract(3 * i, 'months').format('YYYY/MM').split('/')
+        )
+      );
     });
     return seasons;
   }

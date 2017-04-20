@@ -65,6 +65,7 @@ export default class WebScreen extends React.Component {
           ref={WEBVIEW_REF}
           source={{ uri: params.uri }}
           onNavigationStateChange={this.onNavigationStateChange.bind(this)}
+          scalesPageToFit={true}
         />
       </Screen>
     );
