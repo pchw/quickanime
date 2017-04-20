@@ -1224,6 +1224,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.phosphoricholic.quickanime;
 				PRODUCT_NAME = quickanime;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1248,6 +1249,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.phosphoricholic.quickanime;
 				PRODUCT_NAME = quickanime;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
