@@ -3003,6 +3003,12 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
+prop-types@^15.5.8:
+  version "15.5.8"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
+  dependencies:
+    fbjs "^0.8.9"
+
 prr@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/prr/-/prr-0.0.0.tgz#1a84b85908325501411853d0081ee3fa86e2926a"
@@ -3215,14 +3221,15 @@ react-native@0.43.3:
     xpipe "^1.0.5"
     yargs "^6.4.0"
 
-"react-navigation@git+https://github.com/react-community/react-navigation.git#d211492a4c0d66b9a6c8b3e027e220079851362d":
-  version "1.0.0-beta.7"
-  resolved "git+https://github.com/react-community/react-navigation.git#d211492a4c0d66b9a6c8b3e027e220079851362d"
+react-navigation@^1.0.0-beta.8:
+  version "1.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-1.0.0-beta.8.tgz#9d2aa41c465008b4392e309332b0dad13533e180"
   dependencies:
     clamp "^1.0.1"
     fbjs "^0.8.5"
     hoist-non-react-statics "^1.2.0"
     path-to-regexp "^1.7.0"
+    prop-types "^15.5.8"
     react-native-drawer-layout-polyfill "1.2.0"
     react-native-tab-view "^0.0.57"
 

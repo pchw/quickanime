@@ -16,9 +16,10 @@ import {
 const WEBVIEW_REF = 'WEBVIEW';
 
 export default class WebScreen extends React.Component {
-  static navigationOptions = {
-    title: ({ state }) => state.params.title
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.title
+  });
+
   constructor(props) {
     super(props);
     this.state = {
